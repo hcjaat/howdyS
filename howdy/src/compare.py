@@ -14,8 +14,6 @@ import sys
 import os
 import json
 import configparser
-import dlib
-import cv2
 from datetime import timezone, datetime
 import atexit
 import subprocess
@@ -42,6 +40,9 @@ def exit(code=None):
 def init_detector(lock):
 	"""Start face detector, encoder and predictor in a new thread"""
 	global face_detector, pose_predictor, face_encoder
+	global dlib, cv2
+	import dlib
+	import cv2
 
 	# Test if at lest 1 of the data files is there and abort if it's not
 	if not os.path.isfile(paths_factory.shape_predictor_5_face_landmarks_path()):
