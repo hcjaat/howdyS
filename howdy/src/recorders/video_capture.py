@@ -29,6 +29,10 @@ class VideoCapture:
         ret, frame = self.internal.read()
         return frame if ret else None
 
+    def set(self, prop: int, value: float):
+        """Sets a property on the underlying VideoCapture."""
+        self.internal.set(prop, value)
+
     def release(self):
         """Closes the video file stream or capturing device."""
         if self.internal:

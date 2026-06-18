@@ -73,7 +73,7 @@ def execute(config, gtk_proc, opencv):
 			continue
 
 		# Parse the rule with regex
-		regex_result = re.search("^(\w+)\s+([\w\.]+)\s+([a-z]+)(.*)?$", rule, re.IGNORECASE)
+		regex_result = re.search(r"^(\w+)\s+([\w\.]+)\s+([a-z]+)(.*)?$", rule, re.IGNORECASE)
 
 		# Error out if the regex did not match (invalid line)
 		if not regex_result:
@@ -104,10 +104,8 @@ def execute(config, gtk_proc, opencv):
 		instance.gtk_proc = gtk_proc
 		instance.opencv = opencv
 
-		# Set some opensv shorthands
+		# Set some opencv shorthands
 		instance.video_capture = opencv["video_capture"]
-		instance.face_detector = opencv["face_detector"]
-		instance.pose_predictor = opencv["pose_predictor"]
 		instance.clahe = opencv["clahe"]
 
 		# Parse and set the 2 required options for all rubberstamps
