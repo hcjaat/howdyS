@@ -3,26 +3,34 @@ import sys
 
 
 class VideoCapture:
-    """A clean, streamlined wrapper around OpenCV's VideoCapture engine."""
-
     def __init__(self, config):
-        # Move OpenCV import here to achieve Phase 2 Deferred Imports!
         global cv2
         import cv2
 
-        self.config = config
-
-        # Determine the video device path from config
         device_path = config.get("video", "device_path")
         if device_path.isdigit():
             device_path = int(device_path)
 
-        # Enforce modern V4L2 backend selection natively
         self.internal = cv2.VideoCapture(device_path, cv2.CAP_V4L2)
 
         if not self.internal.isOpened():
             print(f"Error: Could not open video device {device_path}", file=sys.stderr)
             sys.exit(1)
+
+        force_mjpeg = config.getboolean("video", "force_mjpeg", fallback=False)
+        if force_mjpeg:
+            fourcc = cv2.VideoWriter_fourcc(*"MJPG")
+            self.internal.set(cv2.CAP_PROP_FOURCC, fourcc)
+
+        device_fps = config.getint("video", "device_fps", fallback=-1)
+        if device_fps > 0:
+            self.internal.set(cv2.CAP_PROP_FPS, device_fps)
+
+        fw = config.getint("video", "frame_width", fallback=-1)
+        fh = config.getint("video", "frame_height", fallback=-1)
+        if fw > 0 and fh > 0:
+            self.internal.set(cv2.CAP_PROP_FRAME_WIDTH, fw)
+            self.internal.set(cv2.CAP_PROP_FRAME_HEIGHT, fh)
 
     def read(self):
         """Grabs, decodes and returns the next video frame."""
