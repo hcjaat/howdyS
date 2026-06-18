@@ -7,7 +7,7 @@ import builtins
 import numpy as np
 import cv2
 import paths_factory
-from models.recognition import get_face_embedding
+from models.recognition import encode_face
 from recorders.video_capture import VideoCapture
 from i18n import _
 
@@ -97,7 +97,7 @@ while frames < 60:
         dark_tries += 1
         continue
 
-    embedding = get_face_embedding(frame)
+    embedding = encode_face(frame)
     if embedding is not None:
         face_encoding = embedding
         break

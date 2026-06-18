@@ -7,7 +7,7 @@ import time
 import cv2
 import numpy as np
 import paths_factory
-from models.recognition import get_face_embedding, match_faces
+from models.recognition import encode_face, match_faces
 from i18n import _
 from recorders.video_capture import VideoCapture
 
@@ -119,7 +119,7 @@ try:
             )
 
             rec_tm = time.time()
-            face_encoding = get_face_embedding(frame)
+            face_encoding = encode_face(frame)
             rec_tm = time.time() - rec_tm
 
             if face_encoding is not None:

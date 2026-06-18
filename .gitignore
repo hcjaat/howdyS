@@ -100,8 +100,10 @@ ENV/
 # mypy
 .mypy_cache/
 
-# generated models
-/howdy/src/models
+__pycache__/
+
+# generated models (dlib data files)
+# ONNX models are now bundled in the repo instead
 
 # snapshots
 /howdy/src/snapshots

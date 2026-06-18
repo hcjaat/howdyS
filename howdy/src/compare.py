@@ -13,7 +13,7 @@ import snapshot
 import numpy as np
 import cv2
 import paths_factory
-from models.recognition import get_face_embedding, match_faces
+from models.recognition import encode_face, match_faces
 from recorders.video_capture import VideoCapture
 from i18n import _
 
@@ -212,7 +212,7 @@ while True:
             frame = cv2.rotate(frame, cv2.ROTATE_90_CLOCKWISE)
             gsframe = cv2.rotate(gsframe, cv2.ROTATE_90_CLOCKWISE)
 
-    face_encoding = get_face_embedding(frame)
+    face_encoding = encode_face(frame)
     if face_encoding is None:
         continue
 

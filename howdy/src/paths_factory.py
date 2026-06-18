@@ -1,13 +1,5 @@
-from pathlib import PurePath, Path
+from pathlib import PurePath
 import paths
-
-
-def yunet_model_path() -> str:
-    return str(Path(__file__).parent / "models" / "face_detection_yunet.onnx")
-
-
-def mobilefacenet_model_path() -> str:
-    return str(Path(__file__).parent / "models" / "mobilefacenet.onnx")
 
 
 def user_model_path(user: str) -> str:
