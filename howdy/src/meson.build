@@ -32,13 +32,9 @@ py_sources = [
     'i18n.py',
     'paths_factory.py',
     'recorders/__init__.py',
-    'recorders/ffmpeg_reader.py',
-    'recorders/pyv4l2_reader.py',
-    'recorders/v4l2.py',
     'recorders/video_capture.py',
     'rubberstamps/__init__.py',
     'rubberstamps/hotkey.py',
-    'rubberstamps/nod.py',
     'snapshot.py',
     py_paths,
 ]
@@ -106,7 +102,7 @@ if not fs.exists(config_path)
     install_data('config.ini', install_dir: confdir, install_mode: 'rwxr--r--', install_tag: 'config')
 endif
 
-install_data('dlib-data/install.sh', 'dlib-data/Readme.md', install_dir: dlibdatadir, install_mode: 'rwxr--r--')
+install_data('models/face_detection_yunet.onnx', 'models/face_recognition_mobilefacenet.onnx', install_dir: pysourcesinstalldir / 'models', install_mode: 'r--r--r--')
 
 install_man('../howdy.1')
 
