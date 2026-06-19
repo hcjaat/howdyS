@@ -3,11 +3,11 @@ Section: misc
 Priority: optional
 Standards-Version: 3.9.7
 Build-Depends: devscripts, git, dh-make, debhelper, fakeroot, python3, python3-pip, python3-setuptools, python3-wheel, ninja-build, meson, libpam0g-dev, pkg-config, libevdev-dev, libinih-dev
-Maintainer: boltgolt <boltgolt@gmail.com>
-Vcs-Git: https://github.com/boltgolt/howdy
+Maintainer: hcjaat <hemant@github.com>
+Vcs-Git: https://github.com/hcjaat/howdyS
 
 Package: howdy
-Homepage: https://github.com/boltgolt/howdy
+Homepage: https://github.com/hcjaat/howdyS
 Architecture: amd64
 Depends: ${misc:Depends}, libc6, libgcc-s1, libpam0g, libstdc++6, curl | wget, python3, python3-pip, python3-setuptools, python3-numpy, python3-opencv, python3-onnxruntime, libopencv-dev
 Recommends: libatlas-base-dev | libopenblas-dev | liblapack-dev, howdy-gtk, v4l-utils

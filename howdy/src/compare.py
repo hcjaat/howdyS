@@ -253,6 +253,10 @@ def authenticate(user: str) -> bool:
 if __name__ == "__main__":
     if len(sys.argv) < 2:
         sys.exit(12)
-    if authenticate(sys.argv[1]):
+    t0 = time.time()
+    result = authenticate(sys.argv[1])
+    elapsed = time.time() - t0
+    print(f"[howdy] authenticate() took {elapsed:.2f}s -> {'OK' if result else 'FAIL'}", file=sys.stderr)
+    if result:
         sys.exit(0)
     sys.exit(11)

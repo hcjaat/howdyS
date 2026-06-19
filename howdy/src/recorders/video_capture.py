@@ -7,14 +7,22 @@ class VideoCapture:
         global cv2
         import cv2
 
-        device_path = config.get("video", "device_path")
-        if device_path.isdigit():
-            device_path = int(device_path)
+        raw_paths = config.get("video", "device_path")
+        paths = [p.strip() for p in raw_paths.split(",")]
 
-        self.internal = cv2.VideoCapture(device_path, cv2.CAP_V4L2)
+        self.internal = None
+        for device_path in paths:
+            if device_path.isdigit():
+                device_path = int(device_path)
+            cap = cv2.VideoCapture(device_path, cv2.CAP_V4L2)
+            if cap.isOpened():
+                self.internal = cap
+                break
+            cap.release()
 
-        if not self.internal.isOpened():
-            print(f"Error: Could not open video device {device_path}", file=sys.stderr)
+        if self.internal is None:
+            print(f"Error: Could not open any video device from '{raw_paths}'",
+                  file=sys.stderr)
             sys.exit(1)
 
         force_mjpeg = config.getboolean("video", "force_mjpeg", fallback=False)

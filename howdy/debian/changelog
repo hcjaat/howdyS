@@ -1,13 +1,17 @@
-howdy (3.0.0) focal; urgency=medium
+howdy (4.0.0) focal; urgency=medium
 
-  * Way too many changes to all list individually, thanks to everyone who contributed!
-  * Rewrote PAM handling logic in C++ (thanks @saidsay-so!)
-  * Added simultaneous face recognition and password authentication
-  * Added native dialog dismissal after successful authentication
-  * Added configurable image rotation (thanks @matan-arnon!)
-  * Fixed four config options whose names were opposite of their function
+  * Replaced dlib with ONNX Runtime + OpenCV DNN (no dlib compilation!)
+  * Face detection: OpenCV Haar cascade (no dlib HOG/CNN models needed)
+  * Face recognition: MobileFaceNet 128-dim embeddings via ONNX Runtime
+  * Matching: cosine similarity instead of Euclidean distance
+  * Removed legacy ffmpeg/pyv4l2 recorders — OpenCV-only video pipeline
+  * Bundled ONNX models in repo — no network download at install time
+  * Multi-device camera fallback (IR preferred, falls back to RGB)
+  * Config-driven MJPEG, FPS, and resolution settings for faster camera init
+  * Reduced dependencies: no boost, no dlib, no cmake for Python modules
+  * Cleaner authenticate() function in compare.py
 
- -- boltgolt <boltgolt@gmail.com>  Sun, 22 Jun 2025 11:52:44 +0200
+ -- hcjaat <hemant@github.com>  Thu, 19 Jun 2026 00:00:00 +0530
 
 howdy (2.6.1) xenial; urgency=medium
 
